@@ -490,6 +490,9 @@ static void tick_nohz_restart(struct tick_sched *ts, ktime_t now)
 	}
 }
 
+/* XXX from kernel/sched.c */
+extern void update_cpu_load_nohz(void);
+
 /**
  * tick_nohz_restart_sched_tick - restart the idle tick from the idle task
  *
@@ -524,6 +527,7 @@ void tick_nohz_restart_sched_tick(void)
 	/* Update jiffies first */
 	select_nohz_load_balancer(0);
 	tick_do_update_jiffies64(now);
+	update_cpu_load_nohz();
 	cpumask_clear_cpu(cpu, nohz_cpu_mask);
 
 #ifndef CONFIG_VIRT_CPU_ACCOUNTING
