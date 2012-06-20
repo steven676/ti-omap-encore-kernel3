@@ -84,7 +84,9 @@ SECTIONS
 #endif
 	}
 
+#ifdef CONFIG_SMP
 	PERCPU_SECTION(L1_CACHE_BYTES)
+#endif
 
 #ifndef CONFIG_XIP_KERNEL
 	. = ALIGN(PAGE_SIZE);
