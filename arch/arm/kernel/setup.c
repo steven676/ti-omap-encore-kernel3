@@ -448,6 +448,16 @@ void cpu_init(void)
 	    : "r14");
 }
 
+void __init smp_setup_processor_id(void)
+{
+	/*
+	 * clear __my_cpu_offset on boot CPU to avoid hang caused by
+	 * using percpu variable early, for example, lockdep will
+	 * access percpu variable inside lock_release
+	 */
+	set_my_cpu_offset(0);
+}
+
 void __init dump_machine_table(void)
 {
 	struct machine_desc *p;
