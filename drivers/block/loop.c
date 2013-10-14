@@ -1666,7 +1666,7 @@ static struct kobject *loop_probe(dev_t dev, int *part, void *data)
 
 	mutex_lock(&loop_devices_mutex);
 	lo = loop_init_one(MINOR(dev) >> part_shift);
-	kobj = lo ? get_disk(lo->lo_disk) : ERR_PTR(-ENOMEM);
+	kobj = lo ? get_disk(lo->lo_disk) : NULL;
 	mutex_unlock(&loop_devices_mutex);
 
 	*part = 0;
