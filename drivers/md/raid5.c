@@ -1664,8 +1664,10 @@ static void raid5_end_write_request(struct bio *bi, int error)
 		return;
 	}
 
-	if (!uptodate)
+	if (!uptodate) {
+		set_bit(STRIPE_DEGRADED, &sh->state);
 		md_error(conf->mddev, conf->disks[i].rdev);
+	}
 
 	rdev_dec_pending(conf->disks[i].rdev, conf->mddev);
 	
