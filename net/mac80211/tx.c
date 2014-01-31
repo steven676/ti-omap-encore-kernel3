@@ -874,7 +874,8 @@ static int ieee80211_fragment(struct ieee80211_local *local,
 		pos += fraglen;
 	}
 
-	skb->len = hdrlen + per_fragm;
+	/* adjust first fragment's length */
+	skb_trim(skb, hdrlen + per_fragm);
 	return 0;
 }
 
