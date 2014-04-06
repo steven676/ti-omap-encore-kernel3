@@ -180,7 +180,7 @@ static struct omap_opp_def __initdata omap36xx_opp_def_list[] = {
 	/* MPU OPP5 - non-standard overclock */
 	OPP_INITIALIZER("mpu", "dpll1_ck", "mpu_iva", true,
 				ENCORE_MPU_OPP5_FREQ, OMAP3630_VDD_MPU_OPP1G_UV),
-#elif defined(CONFIG_ENCORE_MPU_1000MHZ)
+#elif !defined(CONFIG_ENCORE_MPU_STOCK)
 	/* MPU OPP4 - OPP-SB */
 	OPP_INITIALIZER("mpu", "dpll1_ck", "mpu_iva", true,
 				1000000000, OMAP3630_VDD_MPU_OPP1G_UV),
@@ -204,7 +204,7 @@ static struct omap_opp_def __initdata omap36xx_opp_def_list[] = {
 	/* DSP OPP4 - OPP-SB */
 	OPP_INITIALIZER("iva", "dpll2_ck", "mpu_iva", true,
 				800000000, OMAP3630_VDD_MPU_OPP130_UV),
-#else
+#elif !defined(CONFIG_ENCORE_MPU_STOCK)
 	/* DSP OPP4 - OPP-SB */
 	OPP_INITIALIZER("iva", "dpll2_ck", "mpu_iva", true,
 				800000000, OMAP3630_VDD_MPU_OPP1G_UV),
