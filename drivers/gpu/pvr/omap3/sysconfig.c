@@ -65,7 +65,7 @@ static IMG_CPU_VIRTADDR gsSGXRegsCPUVAddr;
 
 #ifdef SYS_OMAP3430_PIN_MEMORY_BUS_CLOCK
 extern struct platform_device *gpsPVRLDMDev;
-#if defined(SGX530) && (SGX_CORE_REV == 125)
+#if defined(SGX530) && (SGX_CORE_REV == 125) && !defined(CONFIG_ENCORE_L3_UNDERCLOCK)
 #define OMAP_MEMORY_BUS_BANDWIDTH_MAX 800000
 #else
 #define OMAP_MEMORY_BUS_BANDWIDTH_MAX 664000
