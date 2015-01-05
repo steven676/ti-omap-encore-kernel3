@@ -84,6 +84,13 @@ void mmc_fixup_device(struct mmc_card *card, const struct mmc_fixup *table)
 }
 EXPORT_SYMBOL(mmc_fixup_device);
 
+/* GCC 4.8 and above mangle the eMMC firmware patching code... */
+#if __GNUC__ > 4 || ( __GNUC__ == 4 && __GNUC_MINOR__ >= 8 )
+#pragma GCC push_options
+/* As a workaround, drop the optimization level */
+#pragma GCC optimize ("O0")
+#endif
+
 /*
  * Quirk code to fix bug in wear leveling firmware for certain Samsung emmc
  * chips
@@ -442,3 +449,7 @@ void mmc_fixup_samsung_fw_p17(struct mmc_card *card)
 		pr_err("%s : Failed to fixup Samsung emmc firmware for P17 corruption(%d)\n",
 			mmc_hostname(card->host), err);
 }
+
+#if __GNUC__ > 4 || ( __GNUC__ == 4 && __GNUC_MINOR__ >= 8 )
+#pragma GCC pop_options
+#endif
